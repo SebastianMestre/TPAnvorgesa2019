@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
+*{
+    font-family: 'Nunito', sans-serif;
+}
+
+.orden {
+    position: static;
+
+    display: grid;
+    grid-gap: 1em;
+    
+    box-sizing: content-box;
+    height: 4.5em;
+    padding: 1em;
+    margin-bottom: 1em;
+    
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 4.5em auto;
+    grid-template-areas:
+    "a b"
+    "a c";
+    
+    border-radius: 2px;
+    border: 1px solid #aaa;
+    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.3);
+}
+
+.orden img {
+    height: 100%;
+    grid-row: 1 / -1;
+}
+
+.orden .numero-de-orden {
+    grid-column: 2 / span 1;
+
+    text-align: center;
+
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.orden .estado-de-orden {
+    grid-column: 2 / span 1;
+
+    text-align: center;
+
+    color: #666;
+}
