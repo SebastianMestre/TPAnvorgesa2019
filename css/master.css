@@ -7,6 +7,8 @@
 .orden {
     position: static;
 
+	animation: fade-opacidad 1s;
+
     display: grid;
     grid-gap: 1em;
     
@@ -24,6 +26,24 @@
     border-radius: 2px;
     border: 1px solid #aaa;
     box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fade-opacidad {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+.orden.resaltado {
+	animation: fondo-resaltado 1s alternate infinite;
+}
+
+@keyframes fondo-resaltado {
+	from {background-color: white;}
+	to {background-color: #cfd;}
+}
+
+.orden.borrando {
+	animation: fade-opacidad 1s reverse;
 }
 
 .orden img {
