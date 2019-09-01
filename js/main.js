@@ -1,8 +1,3 @@
-const textoAElementoHTML = texto => {
-	let template = document.createElement('template');
-	template.innerHTML = texto.trim();
-	return template.content.firstChild;
-};
 
 class ListaDePedidos {
 	constructor (elementoContenedor) {
@@ -13,6 +8,9 @@ class ListaDePedidos {
 	agregar (pedido) {
 		let numeroDePedido = pedido.numero;
 
+		// FIXME:
+		// Si es otro objeto Pedido con el mismo numero mantiene el nuevo
+		// Si es el mismo objeto Pedido se rompe (lo borra)
 		if(this.pedidos.has(numeroDePedido))
 			this.borrar(numeroDePedido);
 
@@ -21,11 +19,18 @@ class ListaDePedidos {
 		this.elementoContenedor.appendChild(pedido.elemento);
 	}
 
+	marcarParaRetirar (numeroDePedido) {
+		if (!this.pedidos.has(numeroDePedido))
+			return;
+
+		this.pedidos.get(numeroDePedido).marcarParaRetirar();
+	}
+
 	borrar (numeroDePedido) {
 		if (!this.pedidos.has(numeroDePedido))
 			return;
 
-		this.pedidos.get(numeroDePedido).elemento.remove();
+		this.pedidos.get(numeroDePedido).borrar();
 
 		this.pedidos.delete(numeroDePedido);
 	}
@@ -35,12 +40,13 @@ class Pedido {
 	constructor (numero, estado) {
 		this.numero = numero;
 		this.estado = estado;
-
-		this.elemento = this.render();
+		this.elemento = textoAElementoHTML(this.html());
 	}
 	
-	resaltar () {
-		this.elemento.classList.add("resaltado")
+	marcarParaRetirar () {
+		this.estado = "Retirar";
+		this.elemento.children[2].innerHTML = this.estado;
+		this.elemento.classList.add("resaltado");
 	}
 
 	borrar () {
@@ -50,13 +56,9 @@ class Pedido {
 		}, 990);
 	}
 
-	render () {
-		return textoAElementoHTML(this.html());
-	}
-
 	html () {
-		return "" +
-`<div class="orden">
+		return `
+<div class="orden">
     <img src="comida.png" alt="icono de comida">
     <div class="numero-de-orden">#${this.numero}</div>
     <div class="estado-de-orden">${this.estado}</div>
