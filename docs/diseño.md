@@ -9,13 +9,13 @@ type Pedido = {
 	id : number,
 	texto : string,
 	estado : "normal" | "resaltado",
-}
+};
 
 type Error = {
 	id : number,
 	texto : string, // error para mostrar al usuario
 	tipo : string, // legible por maquina
-}
+};
 
 Leer () : Array<Pedido>;
 Asignar ( datos : Array<Pedido> ) : Array<Error>;
