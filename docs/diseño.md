@@ -59,4 +59,4 @@ cuales operaciones fallaron (id) y la razon de esto (texto, tipo).
 
 ## Implementacion
 
-TODO
+Vamos a usar Node.js con Express q hace todo re facil, googleen o preguntenle a iago. Si no lo miro yo (mestre) y les cuento como es.
