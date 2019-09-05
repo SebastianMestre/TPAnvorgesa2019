@@ -26,4 +26,8 @@ class Pedido {
     <div class="estado-de-orden">${this.estado}</div>
 </div>`;
 	}
+
+	static fromObj (obj) {
+		return new Pedido(obj.id, obj.texto);
+	}
 }
