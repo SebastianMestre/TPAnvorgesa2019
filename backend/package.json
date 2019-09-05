@@ -1,0 +1,14 @@
+{
+  "name": "anvorgesa-backend",
+  "version": "1.0.0",
+  "description": "Backend para el TP de las anvorgesas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mestre et al",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
