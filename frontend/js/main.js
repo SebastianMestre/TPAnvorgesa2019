@@ -6,9 +6,7 @@ window.addEventListener("load", e => {
 	setInterval(() => {
 		xhrGet("http://localhost:8100/read")
 			.then(JSON.parse)
-			.then(data =>
-				data.forEach(datum =>
-					pedidos.agregar(Pedido.fromObj(datum))));
+			.then(data => pedidos.asignar(data));
 
 	}, 2000);
 });
