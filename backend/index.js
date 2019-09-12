@@ -23,11 +23,12 @@ app.post('/assign', (req, res) => {
 });
 
 app.post('/update', (req, res) => {
-
+	//No sé a qué se refiere con update
 });
 
 app.post('/insert', (req, res) => {
-
+	data.push(/*¿Qué concha va acá? ¿De dónde saco yo el input del pedido?*/);
+	//res.send(orders); Pero, ¿por qué?
 });
 
 
