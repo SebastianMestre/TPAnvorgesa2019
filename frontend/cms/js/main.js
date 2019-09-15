@@ -1,6 +1,46 @@
 
 const mostrar = (data, elemento) => {
 	elemento.innerHTML = data;
+
+	let json = JSON.parse(data);
+
+	let renderizado = "";
+
+	for (let {id, texto, estado} of json) {
+		renderizado += `
+<div class="Entrada">
+	<hr>
+	<div> id: ${id} </div>
+	<div> texto: ${texto} </div>
+	<div>
+		estado: ${estado}
+		<button onclick="actualizar(${id}, '', 'resaltado')"> resaltar </button>
+	</div>
+	<button onclick="borrar(${id})"> borrar </button>
+</div>`;
+	}
+
+	elemento.innerHTML = renderizado;
+}
+
+function actualizar (id, text, status) {
+	if(id == "") return;
+	const args =[{
+		id: Number(id),
+		texto: (text == "" ? undefined : text),
+		estado: (status == "" ? undefined : status),
+	}];
+
+	xhrPost("http://localhost:8100/update", args);
+}
+
+function borrar (id) {
+	if(id == "") return;
+	const args = [{
+		id: Number(id),
+	}];
+
+	xhrPost("http://localhost:8100/delete", args);
 }
 
 function registrarFormulario (elemento, callback) {
@@ -31,23 +71,11 @@ window.addEventListener("load", e => {
 	].map(id => document.getElementById(id));
 
 	registrarFormulario(formularios[0], (ev, id, text, status) => {
-		if(id == "") return;
-		const args = [{
-			id: Number(id),
-		}];
-
-		xhrPost("http://localhost:8100/delete", args);
+		borrar(id);
 	});
 
 	registrarFormulario(formularios[1], (ev, id, text, status) => {
-		if(id == "") return;
-		const args =[{
-			id: Number(id),
-			texto: (text == "" ? undefined : text),
-			estado: (status == "" ? undefined : status),
-		}];
-
-		xhrPost("http://localhost:8100/update", args);
+		actualizar(id, text, status);
 	});
 
 	registrarFormulario(formularios[2], (ev, id, text, status) => {
