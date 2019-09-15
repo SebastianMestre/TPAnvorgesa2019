@@ -8,5 +8,5 @@ window.addEventListener("load", e => {
 		xhrGet("http://localhost:8100/read")
 			.then(JSON.parse)
 			.then(data => pedidos.asignar(data));
-	}, 10000);
+	}, 2000);
 });
