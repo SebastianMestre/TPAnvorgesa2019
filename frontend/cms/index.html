@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<script src="../common/js/utils.js"></script>
+		<script src="./js/main.js"></script>
+	</head>
+	<body>
+		<div id="controller">
+			<div id="delete-controller">
+				<input class="id-input" type="text" placeholder="id del pedido"/>
+				<button class="submit-button">borrar</button>
+			</div>
+			<div id="update-controller">
+				<input class="id-input" type="text" placeholder="id del pedido"/>
+				<input class="text-input" type="text" placeholder="texto del pedido"/>
+				<select class="status-input">
+					<option></option>
+					<option>normal</option>
+					<option>resaltado</option>
+				</select>
+				<button class="submit-button">actualizar</button>
+			</div>
+			<div id="assign-controller">
+				<input class="id-input" type="text" placeholder="id del pedido"/>
+				<input class="text-input" type="text" placeholder="texto del pedido"/>
+				<select class="status-input">
+					<option>normal</option>
+					<option>resaltado</option>
+				</select>
+				<button class="submit-button">asignar</button>
+			</div>
+			<div id="clear-controller">
+				<button class="submit-button">vaciar</button>
+			</div>
+		</div>
+		<div id="display">
+		</div>
+	</body>
+</html>
