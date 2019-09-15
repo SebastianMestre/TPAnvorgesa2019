@@ -8,20 +8,20 @@ app.use((req, res, next) => {
 	next();
 });
 
-let data = [];
+let data = new Map();
 
 app.get('/read', (req, res) => {
 	// req.send toma lo queremos mandar al front end.
 	// read simplemente envia el array data.
-	res.send(data);
+	res.send([...data.values()]);
 });
 
 
 app.post('/assign', (req, res) => {
 	// req.body contiene un array con el input
-	for (let item of req.body) {
-		data.push(item);
-	}
+	req.body.forEach(item => {
+		data.set(item.id, item)
+	});
 
 	// req.send toma lo queremos mandar al front end, en este caso nada.
 	res.send();
@@ -31,28 +31,38 @@ app.post('/assign', (req, res) => {
 // pero queremos cambiar algunos de sus valores.
 // Update itera y actualiza estos valores
 app.post('/update', (req, res) => {
+	req.body.forEach(item => {
+		if (data.has(item.id))
+			Object.assign(data.get(item.id), item);
+	});
+
 	res.send();
 });
 
 app.post('/insert', (req, res) => {
+	req.body.forEach(item => {
+		if (!data.has(item.id))
+			data.set(item.id, item)
+	});
+
 	res.send();
 });
 
 
 app.post('/delete', (req, res) => {
-	let items = [...req.body];
-	data = data.filter(datum =>
-		items.every(item =>
-			item.id !== datum.id));
+	req.body.forEach(item => {
+		data.delete(item.id)
+	});
+
 	res.send();
 });
 
 app.post('/clear', (req, res) => {
-	data = [];
+	data.clear();
 	res.send();
 });
 
 
 app.listen(8100, _ => {
-	console.log("Listening");
+	console.log("Server started.");
 });
